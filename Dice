@@ -1,0 +1,43 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
+
+int main() {
+    int dice1, dice2, sum, point;
+
+    srand(time(NULL)); // seed the random number generator with the current time
+
+    // roll the dice
+    dice1 = rand() % 6 + 1;
+    dice2 = rand() % 6 + 1;
+    sum = dice1 + dice2;
+
+    // print the result of the first roll
+    printf("Rolling the dice...\n");
+    printf("You rolled %d + %d = %d\n", dice1, dice2, sum);
+
+    // check if the player won or lost on the first roll
+    if (sum == 7 || sum == 11) {
+        printf("Congratulations! You won!\n");
+    } else if (sum == 2 || sum == 3 || sum == 12) {
+        printf("Sorry, you lost.\n");
+    } else {
+        printf("Your point is %d.\n", sum);
+        point = sum;
+        sum = 0;
+        while (sum != 7 && sum != point) {
+            // roll the dice again
+            dice1 = rand() % 6 + 1;
+            dice2 = rand() % 6 + 1;
+            sum = dice1 + dice2;
+            printf("You rolled %d + %d = %d\n", dice1, dice2, sum);
+        }
+        // check if the player won or lost
+        if (sum == point) {
+            printf("Congratulations! You won!\n");
+        } else {
+            printf("Sorry, you lost.\n");
+        }
+    }
+    return 0;
+}
